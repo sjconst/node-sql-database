@@ -1,0 +1,24 @@
+{
+  "name": "sql-database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjconst/node-sql-database.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sjconst/node-sql-database/issues"
+  },
+  "homepage": "https://github.com/sjconst/node-sql-database#readme",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "inquirer": "^7.0.0",
+    "mysql": "^2.17.1"
+  }
+}
