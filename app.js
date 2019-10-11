@@ -15,7 +15,7 @@ connection.connect(function(err) {
   displayInventory();
   promptBuy();
 });
-
+//Displays items available for sale
 function displayInventory(){
     var query = "SELECT productID, product_name, price FROM products";
     connection.query(query, (err, result) => {
@@ -24,7 +24,8 @@ function displayInventory(){
             console.log(`ID: ${result[i].productID} || Product: ${result[i].product_name} || Price: ${result[i].price} `)
         }
     })
-}
+};
+//Prompts user to select the ID number of a product and the amount they wish to purchase
 function promptBuy(){
     var query = "SELECT productID FROM products";   
     connection.query(query, (err, result) => {
@@ -59,7 +60,8 @@ function promptBuy(){
             checkInventory(answer);            
         })
     })    
-}
+};
+//Checks to see if enough of that product available
 function checkInventory(answer){    
     var query = `SELECT price, stock_quantity FROM products WHERE productID=${answer.getItem}`; 
     connection.query(query, (err, result) => {
@@ -73,8 +75,8 @@ function checkInventory(answer){
             updateDB(answer, itemStock, price);
         }
     })
-}
-
+};
+//Updates DB with quantity purchased and displays total to user
 function updateDB(answer, stock, price){
     var newQuantity = stock - parseInt(answer.getUnits);
     var getTotal = price * parseInt(answer.getUnits);   
@@ -84,8 +86,8 @@ function updateDB(answer, stock, price){
         console.log(`You're purchase is complete. Your total is $${getTotal}.`);
         nextPrompt();
     })
-}
-
+};
+//Asks user if they would like to purchase anything else, else exits connection
 function nextPrompt(){
     inquirer.prompt([
         {
@@ -103,4 +105,4 @@ function nextPrompt(){
             connection.end();
         }
     })
-}
+};
