@@ -45,7 +45,7 @@ function listItems(){
     connection.query(query, (err, result) => {
         if(err) throw err;
         for(var i = 0; i < result.length; i++){
-            console.log(`ID: ${result[i].productID} || Name: ${result[i].product_name} || Department: ${result[i].department_name} || Price: ${result[i].price} || Quantity: ${result[i].stock_quantity}`)
+            console.log(`ID: ${result[i].productID} || Name: ${result[i].product_name} || Department: ${result[i].department_name} || Price: ${result[i].price} || Quantity: ${result[i].stock_quantity} || Current Sales: ${result[i].product_sales}`)
         }
         displayOptions();
     })
@@ -132,7 +132,7 @@ function addProduct(){
                     if ((value !== "") && (currentItems.includes(value.toLowerCase()) === false)){
                        return true;                                        
                     } else {
-                        return "Sorry, you either didn't enter a name or the already exists.";   
+                        return "Sorry, you either didn't enter a name or that product already exists.";   
                     }               
                 },
             },

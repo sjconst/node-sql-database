@@ -63,30 +63,33 @@ function promptBuy(){
 };
 //Checks to see if enough of that product available
 function checkInventory(answer){    
-    var query = `SELECT price, stock_quantity FROM products WHERE productID=${answer.getItem}`; 
+    var query = `SELECT price, stock_quantity, product_sales FROM products WHERE productID=${answer.getItem}`; 
     connection.query(query, (err, result) => {
         if(err) throw err;
         var price = result[0].price;
-        var itemStock = result[0].stock_quantity;          
+        var itemStock = result[0].stock_quantity;  
+        var sales = result[0].product_sales;        
         if(parseInt(answer.getUnits) > itemStock){
             console.log(`Sorry, we don't have enough of that! You may order up to ${itemStock} units.`);
             promptBuy();
         } else{
-            updateDB(answer, itemStock, price);
+            updateDB(answer, itemStock, price, sales);
         }
     })
 };
 //Updates DB with quantity purchased and displays total to user
-function updateDB(answer, stock, price){
-    var newQuantity = stock - parseInt(answer.getUnits);
-    var getTotal = price * parseInt(answer.getUnits);   
-    var query = `UPDATE products SET stock_quantity = ${newQuantity} WHERE productID=${answer.getItem}`;
-    connection.query(query, (err) => {
-        if(err) throw err;
-        console.log(`You're purchase is complete. Your total is $${getTotal}.`);
-        nextPrompt();
-    })
-};
+function updateDB(answer, stock, price, sales){   
+        var newQuantity = stock - parseInt(answer.getUnits);
+        var getTotal = price * parseInt(answer.getUnits);  
+        var newSales = sales + getTotal;
+        var query = `UPDATE products SET stock_quantity = ${newQuantity}, product_sales=${newSales} WHERE productID=${answer.getItem}`;
+        connection.query(query, (err) => {
+            if(err) throw err;
+            console.log(`You're purchase is complete. Your total is $${getTotal}.`);
+            nextPrompt();
+        })
+};    
+
 //Asks user if they would like to purchase anything else, else exits connection
 function nextPrompt(){
     inquirer.prompt([
