@@ -15,7 +15,7 @@ A three-part node application that lets you query a mySQL database in three diff
 
 ## Getting Started
 
-To use the app and this code, you'll need your own database. Create the database and its tables in a RBMS like mySQL workbench, and swap out the relevant fields at connection. The sql file is included to help you get started. See npm packages required below and in package.json
+To use the app and this code, you'll need your own database. Create the database and its tables in a RBMS like mySQL workbench, and swap out the relevant fields at connection. See npm packages required below and in package.json
 
 ## Technical Approach
 
