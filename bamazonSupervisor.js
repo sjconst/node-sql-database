@@ -41,8 +41,7 @@ function viewAll(){
     connection.query(query, (err, result) => {
         if(err) throw err;
         var t = new Table;    
-        for(var i = 0; i < result.length; i++){
-            var totalProfit = result[i].product_sales - result[i].overhead_costs;
+        for(var i = 0; i < result.length; i++){           
             t.cell("Department ID", result[i].departmentID);
             t.cell("Department Name", result[i].department_name);
             t.cell("Overhead Costs", result[i].overhead_costs);           
